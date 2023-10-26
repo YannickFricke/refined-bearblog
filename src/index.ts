@@ -12,12 +12,12 @@ import { handleDashboardPage } from './pages/Dashboard';
 	logger('Loading Refined BearBlog');
 
 	switch (true) {
-		case currentPath.startsWith(BearBlogPath.Dashboard):
+		case currentPath === BearBlogPath.Dashboard:
 			handleDashboardPage();
 			break;
 
 		default:
-			console.log('Unhandled path: ', currentUrl.pathname);
+			logger('Unhandled path: %s', currentUrl.pathname);
 			break;
 	}
 })();

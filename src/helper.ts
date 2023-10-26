@@ -1,23 +1,23 @@
 /// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
-export function getElementById(
+export function getElementById<T extends HTMLElement>(
 	idToFind: string,
 	parent: HTMLElement | Document = document,
-): HTMLElement | null {
-	return parent.querySelector(`#${idToFind}`);
+): T | null {
+	return parent.querySelector<T>(`#${idToFind}`);
 }
 
-export function getElementByClassName(
+export function getElementByClassName<T extends HTMLElement>(
 	classNameToFind: string,
 	parent: HTMLElement | Document = document,
-): HTMLElement | null {
-	return parent.querySelector(`.${classNameToFind}`);
+): T | null {
+	return parent.querySelector<T>(`.${classNameToFind}`);
 }
 
-export function getElement(
+export function getElement<T extends HTMLElement>(
 	selector: string,
 	parent: HTMLElement | Document = document,
-): HTMLElement | null {
-	return parent.querySelector(selector);
+): T | null {
+	return parent.querySelector<T>(selector);
 }

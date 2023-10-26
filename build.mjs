@@ -1,5 +1,5 @@
 import { context } from 'esbuild';
-
+import InlineImportPlugin from 'esbuild-plugin-inline-import';
 /**
  * @type {string[]}
  */
@@ -38,6 +38,7 @@ const userScriptDefinition = `// ==UserScript==
 		logLevel: 'info',
 		color: true,
 		bundle: true,
+		plugins: [InlineImportPlugin()],
 	});
 
 	await buildContext.rebuild();

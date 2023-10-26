@@ -1,24 +1,6 @@
 import { extractMetadata } from './metadata';
 
-interface BlogMetaOptions {
-	/**
-	 * The SEO meta description of this blog
-	 *
-	 * @type {string}
-	 * @memberof BlogMetaOptions
-	 */
-	description: string;
-
-	/**
-	 * The SEO meta image of this blog
-	 *
-	 * @type {string}
-	 * @memberof BlogMetaOptions
-	 */
-	image: string;
-}
-
-interface BlogProperties {
+export interface BlogProperties {
 	/**
 	 * The actual title of the blog
 	 *
@@ -52,12 +34,20 @@ interface BlogProperties {
 	favicon: string;
 
 	/**
-	 * The SEO meta options of this blog
+	 * The SEO friendly description of this blog
 	 *
-	 * @type {BlogMetaOptions}
+	 * @type {string}
 	 * @memberof BlogProperties
 	 */
-	meta: BlogMetaOptions;
+	meta_description: string;
+
+	/**
+	 * The social media image of this blog
+	 *
+	 * @type {string}
+	 * @memberof BlogProperties
+	 */
+	meta_image: string;
 
 	/**
 	 * The default language of this blog
@@ -81,49 +71,21 @@ const DEFAULT_BLOG_PROPERTIES: BlogProperties = {
 	bear_domain: '',
 	custom_domain: '',
 	favicon: '',
-	meta: {
-		description: '',
-		image: '',
-	},
+	meta_description: '',
+	meta_image: '',
 	lang: '',
 	date_format: '',
 };
-
-const knownProperties = [
-	'title',
-	'bear_domain',
-	'custom_domain',
-	'favicon',
-	'lang',
-	'date_format',
-];
-const knownMetaProperties = ['meta_description', 'meta_image'];
 
 function setProperty(
 	existingProperties: BlogProperties,
 	key: string,
 	value: string,
 ): BlogProperties {
-	if (key.startsWith('meta_') && knownMetaProperties.includes(key)) {
-		// Set the meta property
-		const metaKey = key.substring('meta_'.length);
-
-		return {
-			...existingProperties,
-			meta: {
-				...existingProperties.meta,
-				[metaKey]: value,
-			},
-		};
-	} else if (knownProperties.includes(key)) {
-		// Set the known property
-		return {
-			...existingProperties,
-			[key]: value,
-		};
-	}
-
-	return existingProperties;
+	return {
+		...existingProperties,
+		[key]: value,
+	};
 }
 
 export function parseBlogProperties(textToParse: string): BlogProperties {
@@ -138,4 +100,15 @@ export function parseBlogProperties(textToParse: string): BlogProperties {
 	}
 
 	return parsedProperties;
+}
+
+export function stringifyBlogProperties(
+	blogProperties: BlogProperties,
+): string {
+	return Object.entries(blogProperties)
+		.filter(([_key, value]) => value !== '')
+		.map(([key, value]) => {
+			return `<b>${key}:</b> ${value}`;
+		})
+		.join('\n');
 }

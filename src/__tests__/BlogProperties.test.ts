@@ -12,10 +12,8 @@ describe('BlogProperties', () => {
 				bear_domain: '',
 				custom_domain: '',
 				favicon: '',
-				meta: {
-					description: '',
-					image: '',
-				},
+				meta_description: '',
+				meta_image: '',
 				lang: '',
 				date_format: '',
 			});
@@ -30,10 +28,8 @@ describe('BlogProperties', () => {
 				bear_domain: 'yannickfricke.bearblog.dev',
 				custom_domain: '',
 				favicon: '💻',
-				meta: {
-					description: '',
-					image: '',
-				},
+				meta_description: '',
+				meta_image: '',
 				lang: '',
 				date_format: '',
 			});
@@ -48,10 +44,8 @@ describe('BlogProperties', () => {
 				bear_domain: 'yannickfricke.bearblog.dev',
 				custom_domain: '',
 				favicon: '💻',
-				meta: {
-					description: '',
-					image: '',
-				},
+				meta_description: '',
+				meta_image: '',
 				lang: 'de',
 				date_format: '',
 			});
